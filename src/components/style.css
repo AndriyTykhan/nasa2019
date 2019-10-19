@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.home {
+  background: url("../assets/main.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home-title {
+  color: #fff;
+  font-size: 4em;
+}
+
+.search-container {
+  width: 500px;
+  margin: 50px;
+  text-align: center;
+}
+
+.input-search {
+  width: 35%;
+  height: 30px;
+  border-radius: 10px;
+  padding: 5px 15px;
+  box-shadow: none;
+  border: 1px solid;
+}
+
+.map-container {
+  margin: 50px;
+  width: 70vw;
+}
