@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nasaworldwind/worldwind": "^0.9.0",
+    "google-map-react": "^1.1.5",
+    "google-maps-react": "^2.0.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-google-maps-loader": "^4.2.6",
+    "react-google-places-suggest": "^3.8.0",
+    "react-places-autocomplete": "^7.2.1",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "worldwind-react-globe": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
