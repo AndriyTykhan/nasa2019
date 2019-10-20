@@ -74,6 +74,10 @@ hr {
   border: 1px solid black;
 }
 
+#world {
+  height: 100vh;
+}
+
 .info-data {
   display: none;
   width: 300px;
