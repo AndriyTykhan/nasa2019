@@ -48,3 +48,39 @@ export const MapWrapper = styled.div`
     }
   }
 `;
+
+export const StyledMap = styled(MapWrapper)`
+  padding: 1rem;
+  background-color: #132238;
+
+  // The root svg element of the vector map.
+  svg {
+    stroke: #132238;
+
+    // All layers are just path elements.
+    path {
+      fill: #364e68;
+      cursor: pointer;
+
+      // When a layer is hovered.
+      &:hover {
+        fill: #98ccd3;
+      }
+
+      // When a layer is focused.
+      &:focus {
+        fill: #ebf0f6;
+      }
+
+      // When a layer is 'checked' (via 'aria-checked').
+      &[aria-checked='true'] {
+        fill: #8f1537;
+      }
+
+      // When a layer is 'selected' (via 'aria-current').
+      &[aria-current='true'] {
+        fill: #a275e3;
+      }
+    }
+  }
+`;

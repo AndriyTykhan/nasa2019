@@ -2,44 +2,12 @@ import React from 'react';
 import VectorMap from '@south-paw/react-vector-maps';
 import styled from '@emotion/styled';
 import world from '@south-paw/react-vector-maps/maps/json/world.json';
+import styledComponent from 'styled-components';
+import perc2color from './colorPicker';
 
-import { MapWrapper } from './svgMap/styled.js';
+import PMData  from '../assets/PM.json';
 
-const StyledMap = styled(MapWrapper)`
-  padding: 1rem;
-  background-color: #132238;
-
-  // The root svg element of the vector map.
-  svg {
-    stroke: #132238;
-
-    // All layers are just path elements.
-    path {
-      fill: #364e68;
-      cursor: pointer;
-
-      // When a layer is hovered.
-      &:hover {
-        fill: #98ccd3;
-      }
-
-      // When a layer is focused.
-      &:focus {
-        fill: #ebf0f6;
-      }
-
-      // When a layer is 'checked' (via 'aria-checked').
-      &[aria-checked='true'] {
-        fill: #8f1537;
-      }
-
-      // When a layer is 'selected' (via 'aria-current').
-      &[aria-current='true'] {
-        fill: #a275e3;
-      }
-    }
-  }
-`;
+import { StyledMap } from './svgMap/styled.js';
 
 
 class MyMap extends React.Component {
@@ -49,7 +17,62 @@ class MyMap extends React.Component {
       hovered: null,
       focused: null,
       clicked: null,
+      data: [],
+      PM: [],
+      PMColors: []
     };
+  }
+
+  componentDidMount() {
+    // console.log(PMData);
+    const data = [];
+    const PMColors= [];
+    // console.log('PMda', PMData);
+    // console.log('world', world);
+    
+    PMData.map(country => {
+      const countryData = {};
+      countryData['name'] = country.country;
+      const PM = {
+        2008: country['PME.2008'],
+        2009: country['PME.2009'],
+        2010: country['PME.2010'],
+        2011: country['PME.2011'],
+        2012: country['PME.2012'],
+        2013: country['PME.2013'],
+        2014: country['PME.2014'],
+        2015: country['PME.2015'],
+      }
+      countryData['PM'] = PM;
+      data.push(countryData);
+    });
+
+    data.map(el => {
+      const country = {}
+      const color = perc2color(el.PM[2008]);
+      country['name'] = el.name;
+      country['color'] = color;
+      // const element = document.querySelectorAll(`[name=${el.name}]`);
+      // console.log(element); 
+      PMColors.push(country)
+    });
+
+    // console.log(PMColors);
+
+    const El = document.getElementById('world');
+
+    [...El.childNodes].map(el => {
+      PMColors.map(country => {
+        if (country.name === el.attributes.name.value) {
+          el.fill = country.color
+        }
+      })
+    })
+    
+    
+
+    this.setState({ data, PMColors });
+    
   }
 
   /** When the mouse enters a layer. */
@@ -69,7 +92,28 @@ class MyMap extends React.Component {
   ;
 
   render() {
-    const { hovered, focused, clicked } = this.state;
+    const { hovered, focused, clicked, PMColors } = this.state;
+
+    let layers;
+
+    console.log(world);
+    
+
+    // if (PMColors.length) {
+    //   layers = PMColors.map(el => {
+    //     console.log(el);
+    //     if (el.name && el.color) {
+    //       return styledComponent`
+    //       path {
+    //         &[aria-name=${el.name}] {
+    //           fill: ${el.color};
+    //         }
+    //       `
+    //     }
+    //   });
+    // }
+    
+    // console.log(layers);
 
     const layerProps = {
       onMouseEnter: this.onMouseEnter,
@@ -80,17 +124,6 @@ class MyMap extends React.Component {
     };
     return (
       <div className="map-container">
-        <div>
-        <p>
-            <strong>Hovered layer:</strong> {hovered}
-          </p>
-          <p>
-            <strong>Focused layer:</strong> {focused}
-          </p>
-          <p>
-            <strong>Clicked layer:</strong> {clicked}
-          </p>
-        </div>
         {/* <StyledMap> */}
         <StyledMap>
           <VectorMap {...world} layerProps={layerProps} />
