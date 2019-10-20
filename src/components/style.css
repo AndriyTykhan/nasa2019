@@ -36,6 +36,70 @@
 }
 
 .map-container {
-  margin: 0 50px 50px 10px;
+  /* margin: 0 0 50px 10px; */
+  display: flex;
+  position: relative;
+
   /* width: 70vw; */
+}
+
+.info {
+  position: absolute;
+  width: 300px;
+  padding: 20px;
+  right: 0;
+  top: 10px;
+  background-color: #ffff;
+    border-radius: 10px;
+}
+.info > *  {
+  padding-top: 10px;
+}
+.text {
+  margin: 10px 0;
+}
+
+.list-el {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  background-color: #ebebeb;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+hr {
+  padding: 0 !important; 
+  border: 1px solid black;
+}
+
+.info-data {
+  display: none;
+  width: 300px;
+  position: absolute;
+  left: -310px;
+  background-color: #fff;
+}
+
+.info-icon {
+  width: 25px;
+  margin-right: 10px;
+}
+
+.pm-triger, .co-triger {
+  cursor: pointer;
+}
+
+.pm-triger:hover .pm-data {
+  display: block;
+}
+
+.co-triger:hover .co-data {
+  display: block;
+}
+
+.country-name {
+  text-align: center;
+    font-size: 25px;
 }
